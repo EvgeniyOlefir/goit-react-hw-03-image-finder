@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import pixabayAPI from 'services/pixabay-api';
+import pixabayAPI from '../../services/service-api';
 import ImageGalleryItem from './ImageGalleryItem';
-// import Loader from 'components/Loader';
-// import ErrorSearch from 'components/ErrorSearch';
-// import LoadMoreBtn from 'components/LoadMoreBtn';
-// import Modal from 'components/Modal';
+import Loader from '../Loader';
+// import ErrorSearch from '../ErrorSearch';
+import LoadMoreBtn from '../LoadMoreBtn';
+import Modal from '../Modal';
 import s from './ImageGallery.module.css';
 
 export default class ImageGallery extends Component {
@@ -85,7 +85,7 @@ export default class ImageGallery extends Component {
   };
 
   render() {
-    const { images, error, status, showModal } = this.state;
+    const { images, status, showModal } = this.state;
     const { url, alt } = this.state.modalImgProps;
 
     if (status === 'idle') {
@@ -96,9 +96,6 @@ export default class ImageGallery extends Component {
       return <Loader />;
     }
 
-    if (status === 'rejected') {
-      return <ErrorSearch message={error.message} />;
-    }
     if (status === 'resolved') {
       return (
         <>
